@@ -1,26 +1,61 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  --color-neon-cyan: #00f3ff;
+  --color-neon-pink: #ff00ff;
+  --color-neon-purple: #9d00ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #f8fafc; /* light mode */
+  --foreground: #020617;
+}
+
+.dark {
+  --background: #050505; /* Cyberpunk dark mode */
+  --foreground: #f8fafc;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px var(--color-neon-cyan), 0 0 20px var(--color-neon-cyan);
+}
+
+.text-glow-pink {
+  text-shadow: 0 0 10px var(--color-neon-pink), 0 0 20px var(--color-neon-pink);
+}
+
+.neon-border {
+  box-shadow: 0 0 10px var(--color-neon-cyan), inset 0 0 10px var(--color-neon-cyan);
+}
+
+.neon-border-pink {
+  box-shadow: 0 0 10px var(--color-neon-pink), inset 0 0 10px var(--color-neon-pink);
+}
+
+/* Scrollbar customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-neon-purple);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-pink);
 }

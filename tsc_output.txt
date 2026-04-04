@@ -1,0 +1,15 @@
+src/app/contact/page.tsx(5,16): error TS2305: Module '"lucide-react"' has no exported member 'Github'.
+src/app/contact/page.tsx(5,24): error TS2305: Module '"lucide-react"' has no exported member 'Twitter'.
+src/app/contact/page.tsx(5,33): error TS2305: Module '"lucide-react"' has no exported member 'Linkedin'.
+src/app/projects/page.tsx(5,24): error TS2305: Module '"lucide-react"' has no exported member 'Github'.
+src/app/projects/page.tsx(78,15): error TS2322: Type '{ hidden: { opacity: number; y: number; }; show: { opacity: number; y: number; transition: { type: string; stiffness: number; damping: number; }; }; }' is not assignable to type 'Variants'.
+  Property 'show' is incompatible with index signature.
+    Type '{ opacity: number; y: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'Variant'.
+      Type '{ opacity: number; y: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ opacity: number; y: number; transition: { type: string; stiffness: number; damping: number; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues$1 | undefined; }'.
+          Types of property 'transition' are incompatible.
+            Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'Transition<any> | undefined'.
+              Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+                Type '{ type: string; stiffness: number; damping: number; }' is not assignable to type 'ValueAnimationTransition<any>'.
+                  Types of property 'type' are incompatible.
+                    Type 'string' is not assignable to type 'AnimationGeneratorType | undefined'.
