@@ -2,37 +2,37 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useTheme } from "next-themes"
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Moon, Sun, Menu, X } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import {
+  Home,
+  User,
+  Briefcase,
+  Wrench,
+  Music,
+  Award,
+  Mail
+} from "lucide-react"
 import { useSound } from "./SoundProvider"
 import { cn } from "@/lib/utils"
 
 const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "About", href: "/about" },
-  { name: "Projects", href: "/projects" },
-  { name: "Tools", href: "/skills" },
-  { name: "Playlist", href: "/fun-zone" },
-  { name: "Certificate", href: "/journey" },
-  { name: "Contact", href: "/contact" },
+  { name: "Home", href: "/", icon: Home },
+  { name: "About", href: "/about", icon: User },
+  { name: "Projects", href: "/projects", icon: Briefcase },
+  { name: "Tools", href: "/skills", icon: Wrench },
+  { name: "Playlist", href: "/fun-zone", icon: Music },
+  { name: "Certificate", href: "/journey", icon: Award },
+  { name: "Contact", href: "/contact", icon: Mail },
 ]
 
 export default function Navbar() {
   const pathname = usePathname()
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
   const { playHover, playClick } = useSound()
 
   // Easter egg states
   const [clickCount, setClickCount] = useState(0)
   const [showEasterEgg, setShowEasterEgg] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   const handleLogoClick = () => {
     playClick()
@@ -47,132 +47,90 @@ export default function Navbar() {
     })
   }
 
-  const toggleTheme = () => {
-    playClick()
-    setTheme(theme === "dark" ? "light" : "dark")
-  }
-
   return (
-    <nav className="fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-background/50 backdrop-blur-md">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        
+    // Penambahan w-full dan max-w-[95vw] agar tidak tembus batas layar HP
+    <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[95vw] sm:max-w-max flex justify-center">
+      {/* Penambahan overflow-x-auto dan menyembunyikan scrollbar agar bisa di-swipe di HP kecil */}
+      <nav className="flex items-center gap-0.5 sm:gap-1 md:gap-2 justify-start sm:justify-center rounded-full border border-white/10 bg-black/40 px-2 sm:px-3 py-1.5 sm:py-2 md:py-3 shadow-lg backdrop-blur-lg overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+
         {/* Logo / Easter Egg Trigger */}
-        <div className="relative">
+        <div className="relative group flex items-center pr-2 md:pr-4 shrink-0">
           <motion.button
             onClick={handleLogoClick}
             onMouseEnter={playHover}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-2xl font-bold tracking-tighter text-glow-cyan"
+            // Ukuran teks sedikit diperkecil di HP
+            className="text-base sm:text-lg md:text-xl font-bold tracking-tighter text-foreground hover:text-cyan-400 transition-colors"
           >
-            ファトクル<span className="text-[var(--color-neon-pink)]">_</span>
+            ファトクル<span className="text-pink-400">_</span>
           </motion.button>
-          
+
           {/* Easter Egg Message */}
-          {showEasterEgg && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              className="absolute left-0 top-full mt-2 whitespace-nowrap rounded border border-[var(--color-neon-pink)] bg-black/80 px-3 py-1 text-sm text-[var(--color-neon-pink)] neon-border-pink"
-            >
-              You found the secret! 🤖✨
-            </motion.div>
-          )}
+          <AnimatePresence>
+            {showEasterEgg && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute bottom-full mb-4 left-0 whitespace-nowrap rounded-md border border-pink-400 bg-black/80 px-3 py-1.5 text-sm text-pink-400 shadow-[0_0_10px_rgba(244,114,182,0.3)] backdrop-blur-md"
+              >
+                You found the secret! 🤖✨
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Divider */}
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 h-4 sm:h-6 w-px bg-white/20" />
         </div>
 
-        {/* Desktop Links */}
-        <div className="hidden items-center gap-6 md:flex">
+        {/* Dock Links */}
+        <div className="flex items-center gap-0 sm:gap-1">
           {navLinks.map((link) => {
             const isActive = pathname === link.href || (pathname === "/home" && link.href === "/")
+            const Icon = link.icon
+
             return (
               <Link
                 key={link.name}
                 href={link.href}
                 onMouseEnter={playHover}
                 onClick={playClick}
-                className={cn(
-                  "relative text-sm font-medium transition-colors hover:text-[var(--color-neon-cyan)]",
-                  isActive ? "text-[var(--color-neon-cyan)] text-glow-cyan" : "text-foreground/70"
-                )}
+                className="relative group p-1 md:p-2 shrink-0"
               >
-                {link.name}
-                {isActive && (
-                  <motion.div
-                    layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--color-neon-cyan)]"
-                    style={{ boxShadow: "0 0 8px var(--color-neon-cyan)" }}
-                  />
-                )}
+                <motion.div
+                  whileHover={{ scale: 1.2, y: -4 }}
+                  whileTap={{ scale: 0.9 }}
+                  className={cn(
+                    "relative flex items-center justify-center rounded-full p-2 sm:p-2.5 transition-colors",
+                    isActive
+                      ? "bg-white/10 text-cyan-400"
+                      : "text-foreground/60 hover:text-foreground hover:bg-white/5"
+                  )}
+                >
+                  {/* Ukuran icon disesuaikan: h-4 w-4 di HP, h-6 w-6 di PC */}
+                  <Icon className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 stroke-[1.5]" />
+
+                  {/* Active glow dot */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="dock-indicator"
+                      className="absolute -bottom-1.5 h-1 w-1 rounded-full bg-cyan-400"
+                      style={{ boxShadow: "0 0 8px #22d3ee" }}
+                    />
+                  )}
+                </motion.div>
+
+                {/* Tooltip */}
+                <div className="absolute -top-12 left-1/2 -translate-x-1/2 rounded-md border border-white/10 bg-black/80 px-3 py-1.5 text-xs text-white opacity-0 transition-opacity group-hover:opacity-100 whitespace-nowrap backdrop-blur-md pointer-events-none shadow-xl hidden md:block">
+                  {link.name}
+                </div>
               </Link>
             )
           })}
         </div>
 
-        {/* Actions (Theme + Mobile Menu) */}
-        <div className="flex items-center gap-4">
-          {mounted && (
-            <motion.button
-              onClick={toggleTheme}
-              onMouseEnter={playHover}
-              whileHover={{ scale: 1.1, rotate: 15 }}
-              whileTap={{ scale: 0.9 }}
-              className="rounded-full p-2 hover:bg-white/10"
-              aria-label="Toggle Theme"
-            >
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5 text-yellow-300 drop-shadow-[0_0_8px_rgba(253,224,71,0.8)]" />
-              ) : (
-                <Moon className="h-5 w-5 text-slate-800" />
-              )}
-            </motion.button>
-          )}
-
-          {/* Mobile menu toggle */}
-          <button
-            className="md:hidden"
-            onClick={() => {
-              playClick()
-              setIsOpen(!isOpen)
-            }}
-          >
-            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Links Dropdown */}
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="border-b border-white/10 bg-background/95 backdrop-blur-md md:hidden"
-        >
-          <div className="flex flex-col px-6 py-4">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href || (pathname === "/home" && link.href === "/")
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onMouseEnter={playHover}
-                  onClick={() => {
-                    playClick()
-                    setIsOpen(false)
-                  }}
-                  className={cn(
-                    "py-3 text-sm font-medium transition-colors hover:text-[var(--color-neon-cyan)]",
-                    isActive ? "text-[var(--color-neon-cyan)]" : "text-foreground/80"
-                  )}
-                >
-                  {link.name}
-                </Link>
-              )
-            })}
-          </div>
-        </motion.div>
-      )}
-    </nav>
+      </nav>
+    </div>
   )
 }

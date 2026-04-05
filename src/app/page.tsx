@@ -8,13 +8,13 @@ import { useSound } from "@/components/SoundProvider"
 const Typewriter = ({ text }: { text: string }) => {
   const letters = Array.from(text)
   return (
-    <motion.span>
+    <motion.span className="inline-block">
       {letters.map((letter, i) => (
         <motion.span
           key={i}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.1, delay: i * 0.1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: i * 0.04, ease: "easeOut" }}
         >
           {letter}
         </motion.span>
@@ -27,13 +27,12 @@ export default function Home() {
   const { playHover, playClick } = useSound()
 
   return (
-    <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden">
-      {/* Parallax Background Glow */}
+    <div className="relative flex flex-1 flex-col items-center justify-center overflow-hidden font-sans">
+      {/* Background Glows - subtle variants */}
       <motion.div
-        className="absolute -top-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-[var(--color-neon-cyan)]/20 blur-[120px]"
+        className="absolute top-0 -z-10 h-[600px] w-[600px] -translate-y-1/2 rounded-full bg-cyan-500/10 blur-[120px]"
         animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.5, 0.8, 0.5],
+          opacity: [0.3, 0.5, 0.3],
         }}
         transition={{
           duration: 8,
@@ -42,10 +41,9 @@ export default function Home() {
         }}
       />
       <motion.div
-        className="absolute -bottom-1/4 -z-10 h-[500px] w-[500px] rounded-full bg-[var(--color-neon-pink)]/20 blur-[120px]"
+        className="absolute bottom-0 -z-10 h-[600px] w-[600px] translate-y-1/2 rounded-full bg-purple-500/10 blur-[120px]"
         animate={{
-          scale: [1, 1.5, 1],
-          opacity: [0.5, 0.7, 0.5],
+          opacity: [0.3, 0.6, 0.3],
         }}
         transition={{
           duration: 10,
@@ -55,47 +53,60 @@ export default function Home() {
         }}
       />
 
-      <div className="z-10 flex flex-col items-center text-center space-y-6 px-6">
+      <div className="z-10 flex flex-col items-center text-center space-y-8 px-6 max-w-4xl">
+        {/* Terminal Text */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex items-center gap-3 text-glow-cyan"
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex items-center gap-3"
         >
-          <Terminal className="h-8 w-8 text-[var(--color-neon-cyan)]" />
-          <h2 className="text-xl font-mono text-[var(--color-neon-cyan)]">XhuuLL</h2>
+          <Terminal className="h-6 w-6 text-cyan-400" />
+          <h2 className="text-lg font-mono text-cyan-400 opacity-80 tracking-wide">
+            {`> XhuuLL`}
+          </h2>
         </motion.div>
 
-        <h1 className="text-5xl font-black tracking-tight sm:text-7xl lg:text-8xl">
-          <span className="block text-foreground drop-shadow-md">HELLO, I AM</span>
-          <span className="inline-block bg-gradient-to-r from-[var(--color-neon-cyan)] to-[var(--color-neon-pink)] bg-clip-text text-transparent filter drop-shadow-[0_0_15px_rgba(255,0,255,0.5)]">
-            <Typewriter text="AKHMAD FATKHUL ARIFIN" />
-          </span>
-        </h1>
+        {/* Main Heading */}
+        <div className="space-y-4">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="block text-foreground/80 text-xl md:text-2xl font-light tracking-widest"
+          >
+            HELLO, I AM
+          </motion.span>
+          <h1 className="text-2xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-extrabold -tracking-tight whitespace-nowrap">
+            <span className="inline-block bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent opacity-90 pb-2">
+              <Typewriter text="AKHMAD FATKHUL ARIFIN" />
+            </span>
+          </h1>
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="max-w-2xl text-lg text-foreground/70"
-        >
-          Building things on the internet, from serious projects to random midnight ideas. Welcome to my space.
-        </motion.p>
-
+        {/* Call to Action Buttons */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 2, type: "spring" }}
-          className="mt-8 flex gap-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0, duration: 0.8, ease: "easeOut" }}
+          className="pt-8 flex flex-col sm:flex-row gap-4"
         >
           <Link
             href="/about"
             onMouseEnter={playHover}
             onClick={playClick}
-            className="group relative flex items-center gap-2 overflow-hidden rounded border border-[var(--color-neon-cyan)] bg-background px-8 py-4 font-mono font-bold text-[var(--color-neon-cyan)] transition-all hover:bg-[var(--color-neon-cyan)] hover:text-black neon-border"
+            className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-8 py-4 font-sans font-medium text-foreground transition-all hover:scale-105 hover:bg-white/20 hover:shadow-[0_0_20px_rgba(34,211,238,0.2)]"
           >
-            <span>ENTER SYSTEM</span>
-            <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
+            <span>Get Started</span>
+            <ArrowRight className="h-5 w-5 opacity-70 transition-transform group-hover:translate-x-1 group-hover:opacity-100" />
+          </Link>
+          <Link
+            href="/contact"
+            onMouseEnter={playHover}
+            onClick={playClick}
+            className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full border border-white/10 bg-black/40 backdrop-blur-md px-8 py-4 font-sans font-medium text-foreground transition-all hover:scale-105 hover:bg-white/5 hover:border-white/30"
+          >
+            <span>Contact Me</span>
           </Link>
         </motion.div>
       </div>
