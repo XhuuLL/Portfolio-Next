@@ -50,7 +50,6 @@ const TypewriterGlitch = ({ text }: { text: string }) => {
   )
 }
 
-// Tambahkan ': Variants' agar TypeScript bisa membaca tipe animasinya
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
@@ -106,7 +105,7 @@ export default function About() {
               <div className="flex gap-4 text-[10px] sm:text-xs font-mono text-white/40 tracking-wider">
                 <span className="flex items-center gap-1"><TerminalSquare className="w-3 h-3" /> ROOT</span>
                 <span className="hidden sm:inline">|</span>
-                <span className="text-[var(--color-neon-cyan)]">LOC: BREBES_ID</span>
+                <span className="text-[var(--color-neon-cyan)]">ファトクル</span>
               </div>
             </div>
 

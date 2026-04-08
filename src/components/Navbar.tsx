@@ -48,19 +48,15 @@ export default function Navbar() {
   }
 
   return (
-    // Penambahan w-full dan max-w-[95vw] agar tidak tembus batas layar HP
     <div className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-[95vw] sm:max-w-max flex justify-center">
-      {/* Penambahan overflow-x-auto dan menyembunyikan scrollbar agar bisa di-swipe di HP kecil */}
       <nav className="flex items-center gap-0.5 sm:gap-1 md:gap-2 justify-start sm:justify-center rounded-full border border-white/10 bg-black/40 px-2 sm:px-3 py-1.5 sm:py-2 md:py-3 shadow-lg backdrop-blur-lg overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 
-        {/* Logo / Easter Egg Trigger */}
         <div className="relative group flex items-center pr-2 md:pr-4 shrink-0">
           <motion.button
             onClick={handleLogoClick}
             onMouseEnter={playHover}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            // Ukuran teks sedikit diperkecil di HP
             className="text-base sm:text-lg md:text-xl font-bold tracking-tighter text-foreground hover:text-cyan-400 transition-colors"
           >
             ファトクル<span className="text-pink-400">_</span>
