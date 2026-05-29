@@ -2,7 +2,7 @@
 
 import { motion, Variants } from "framer-motion"
 import { useSound } from "@/components/SoundProvider"
-import { Bot, Sparkles, Cpu, MousePointer2, Cloud, Rocket } from "lucide-react"
+import { Bot, Sparkles, Cpu, MousePointer2, BrainCircuit, Rocket } from "lucide-react"
 
 const aiTools = [
   { 
@@ -30,10 +30,10 @@ const aiTools = [
     color: "var(--color-neon-cyan)" 
   },
   { 
-    name: "Cloud", 
-    desc: "Tempat ngelempar beban hidup (dan ratusan file node_modules) biar laptop kentang nggak menjerit.", 
-    icon: Cloud, 
-    color: "var(--color-neon-pink)" 
+    name: "Claude AI", 
+    desc: "Teman diskusi buat mikir panjang dan nulis kode yang rapi. Jawabannya natural, cocok buat ngeberesin bug yang bikin pusing.", 
+    icon: BrainCircuit, 
+    color: "var(--color-neon-orange)" 
   },
   { 
     name: "Antigravity", 
