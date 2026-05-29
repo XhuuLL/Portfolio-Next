@@ -122,20 +122,20 @@ export default function About() {
 
             <div className="space-y-6 text-white/70 leading-relaxed font-mono text-sm md:text-base flex flex-col relative z-10">
               <p className="pl-4 border-l-2 border-white/10 hover:border-[var(--color-neon-cyan)] transition-colors duration-300">
-                <ScrambleText delay={0} text="Hello kids, saya Fatkhul. Kadang ngoding pakai AI, kadang rebahan, kadang bingung sendiri." />
+                <ScrambleText delay={0} text="Hello kids, saya Fatkhul. Kadang ngoding pakai AI, kadang rebahan, kadang bingung sendiri kaya wong kentir." />
               </p>
               <p className="pl-4 border-l-2 border-white/10 hover:border-[var(--color-neon-pink)] transition-colors duration-300">
-                <ScrambleText delay={1} text="Kadang bikin project keren pakai AI, kadang cuma buka VSCode terus bengong. Ide sering muncul jam 2 pagi, tapi eksekusinya nanti dulu." />
+                <ScrambleText delay={1} text="Kadang bikin project keren pakai AI, kadang cuma buka VSCode terus bengong. Seringkali ide muncul jam dua pagi, tetapi hasilnya akan datang kemudian." />
               </p>
               <p className="pl-4 border-l-2 border-white/10 hover:border-[var(--color-neon-purple)] transition-colors duration-300">
-                <ScrambleText delay={2} text="Kalau lagi semangat bisa ngoding berjam-jam pakai AI, kalau tidak ya buka Facebook dulu bentar hehe (yang ujung-ujungnya 3 jam)." />
+                <ScrambleText delay={2} text="Kalau lagi semangat bisa ngoding berjam-jam pakai AI, kalau tidak ya buka Facebook dulu bentar hehe (sing ujung ujung e 3 jam)." />
               </p>
               
               {/* Quote Section */}
               <div className="mt-8 pt-6 border-t border-white/10">
                 <p className="font-bold text-white text-lg italic text-center relative">
                   <span className="absolute -left-2 -top-4 text-4xl text-[var(--color-neon-cyan)]/20">&quot;</span>
-                  <ScrambleText delay={3} text="Saya percaya satu hal: kalau error, berarti masih hidup." />
+                  <ScrambleText delay={3} text="Saya percaya satu hal: kalau error, berarti waktune mecuti AI sampai bener." />
                   <span className="absolute -right-2 -bottom-4 text-4xl text-[var(--color-neon-cyan)]/20">&quot;</span>
                 </p>
               </div>
